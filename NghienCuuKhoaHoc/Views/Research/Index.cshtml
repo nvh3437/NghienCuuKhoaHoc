@@ -1,0 +1,473 @@
+﻿@using NghienCuuKhoaHoc.General.Extension
+@{
+    ViewData["Title"] = "Nghiên cứu";
+}
+@model ResearchViewModel
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb bg-white">
+    <div class="row align-items-center">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Đề tài nghiên cứu</h4>
+        </div>
+        <div class="col-md-3 col-sm-4 col-xs-6 ms-auto">
+            <div class="dropdown float-end">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-align-left"></i> Công cụ
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li>
+                        <button type="button" class=" dropdown-item" data-bs-toggle="modal" data-bs-target="#createModal">
+                            Thêm mới
+                        </button>
+                    </li>
+
+                    <li><button id="deleteRange" onclick="deleteRange()" class="dropdown-item">Xóa đã chọn</button></li>
+                    <li><button id="extendRange" onclick="openExtendModal()" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#extendModal">Gia hạn đã chọn</button></li>
+                </ul>
+            </div>
+            <div class="dropdown float-end me-1">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class=" fas fa-"></i> Bộ lọc
+                </button>
+                <form id="Filter" name="Filter" method="get" action="/Research" class="dropdown-menu p-4" aria-labelledby="dropdownMenuButton1">
+                    <div class="mb-3">
+                        <label for="Field" class="form-label">Lĩnh vực</label>
+                        <select id="Field" name="Field" class="form-select" aria-label="Default select example" value="@Model.Field">
+                            <option value="">Tất cả</option>
+                            @foreach (var item in Model.Fields)
+                            {
+                                <option value="@item.Value">@item.Value</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Status" class="form-label">Trạng thái</label>
+                        <select id="Status" name="Status" class="form-select" aria-label="Default select example">
+                            <option value="">Tất cả</option>
+                            <option value="Handed">Đã bàn giao</option>
+                            <option value="Defended">Đã bảo vệ trước Hội đồng</option>
+                            <option value="Inspected">Đã nghiệm thu</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Year" class="form-label">Năm</label>
+                        <select id="Year" name="Year" class="form-select" aria-label="Default select example" value="@Model.Year">
+                            <option value="">Tất cả</option>
+                            @foreach (var item in Model.Years)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="PageSize" class="form-label">Hiển thị</label>
+                        <select id="PageSize" name="PageSize" class="form-select" aria-label="Default select example">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Thực hiện</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="white-box">
+                <div class="d-md-flex mb-3">
+                    <h3 class="box-title mb-0">Đề tài</h3>
+
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">Tiêu đề</th>
+                                <th class="border-top-0">Chủ nhiệm</th>
+                                <th class="border-top-0">Lĩnh vực</th>
+                                <th class="border-top-0">Trạng thái</th>
+                                <th class="border-top-0">Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var item in Model.Researches)
+                                {
+                                    <tr>
+                                        <td class="txt-oflo">@item.Subject</td>
+                                        <td class="txt-oflo">@item.Instructor</td>
+                                        <td class="txt-oflo">@item.Field</td>
+                                        <td class="txt-oflo @item.Status.GetClass()">@item.Status.GetName()</td>
+                                        <td>
+                                            <input class="form-check-input" type="checkbox" value="@item.Id" name="selectedResearches" id="@item.Id">
+                                            <button class="border-0" data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                onclick="openUpdateModal(
+                                                            '@item.Id', '@item.Subject', '@item.InstructorId',
+                                                            '@item.Field', '@item.Expense','@item.DateStarted',
+                                                            '@item.DateExpired','@item.Status',
+                                                            @item.ResearchFiles.ToArrayJS()
+                                                        )">
+                                                <i class=" far fa-edit"></i>
+                                            </button>
+                                            <a href="Research/Detail?Id=@item.Id"><i class="  fas fa-info-circle"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    @Html.PagedListPager(
+                    Model.Researches,
+                    page => Url.Action("Index",new { Page = page, PageSize = Model.PageSize, Field = Model.Field, Status = Model.Status, FindKeyword = Model.FindKeyword }),
+                    new PagedListRenderOptions()
+                    {
+                    ActiveLiElementClass = "bg-info text-light px-1",
+                    MaximumPageNumbersToDisplay = 5,
+                    ContainerDivClasses = new List<string>{"product__pagination"},
+                    LinkToPreviousPageFormat = "<i class=' fas fa-angle-left'></i>",
+                    LinkToNextPageFormat = "<i class=' fas fa-angle-right'></i>",
+                    LinkToFirstPageFormat = "<i class='fas fa-angle-double-left'></i>",
+                    LinkToLastPageFormat = "<i class='fas fa-angle-double-right'></i>",
+                    LiElementClasses = new List<string>{"me-3"},
+
+                    })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">Cập nhật Đề tài</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="UpdateForm" method="post" asp-action="Update" asp-controller="Research" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="Id" class="form-label">Mã đề tài <span class="text-danger" asp-validation-for="Id"></span></label>
+                        <input asp-for="Id" type="text" class="form-control" name="Id" id="Id" readonly placeholder="DT0123456789">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Subject" class="form-label">Tiêu đề <span class="text-danger" asp-validation-for="Subject"></span></label>
+                        <textarea asp-for="Subject" type="text" class="form-control" name="Subject" id="Subject" placeholder="Nghiên cứu ABC XYZ">
+                        </textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="InstructorId" class="form-label">Chủ nhiệm<span class="text-danger" asp-validation-for="InstructorId"></span></label>
+                        <select asp-for="InstructorId" name="InstructorId" id="InstructorId" class="form-select" aria-label="Default select example">
+                            <option value="">Chọn chủ nhiệm</option>
+                            @foreach (var item in Model.Personals)
+                            {
+                                <option value="@item.Id">@item.Name - @item.Id</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Field" class="form-label">Lĩnh vực <span class="text-danger" asp-validation-for="Field"></span></label>
+                        <div class="dropdown">
+                            <input asp-for="Field" type="text" class="form-control dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" name="Field" id="Field" placeholder="Công nghệ thông tin">
+                            <ul class="dropdown-menu" aria-labelledby="">
+                                @foreach (var item in Model.Fields)
+                                {
+                                    <li><button type="button" onclick="selectFieldUpdateForm('@item.Value')" class="dropdown-item">@item.Value</button></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Expense" class="form-label">Kinh phí <span class="text-danger" asp-validation-for="Expense"></span></label>
+                        <input asp-for="Expense" type="number" class="form-control" name="Expense" id="Expense" placeholder="1.000.000">
+                    </div>
+                    <div class="mb-3">
+                        <label for="DateStarted" class="form-label">Ngày bắt đầu <span class="text-danger" asp-validation-for="DateStarted"></span></label>
+                        <input asp-for="DateStarted" type="date" class="form-control" name="DateStarted" id="DateStarted">
+                    </div>
+                    <div class="mb-3">
+                        <label for="DateExpired" class="form-label">Ngày hết hạn <span class="text-danger" asp-validation-for="DateExpired"></span></label>
+                        <input asp-for="DateExpired" type="date" class="form-control" name="DateExpired" id="DateExpired">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Status" class="form-label">Trạng thái <span class="text-danger" asp-validation-for="Status"></span></label>
+                        <select asp-for="Status" name="Status" id="Status" class="form-select" aria-label="Default select example">
+                            <option value="">Chọn trạng thái</option>
+                            <option value="Handed">Đã bàn giao</option>
+                            <option value="Defended">Đã bảo vệ trước Hội đồng</option>
+                            <option value="Inspected">Đã nghiệm thu</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">File đính kèm</label>
+                        <button type="button" onclick="selectDeleteFiles()" id="activeDeleteFilesButton" class="btn btn-outline-warning btn-sm">Xóa</button>
+                        <div id="showFileLocation">
+                            @*<label><img src="/plugins/images/file/pp.png" class="img-thumbnail" alt="..."></label>
+                                <img src="/plugins/images/file/pp.png" class="img-thumbnail" alt="...">
+                                <img src="/plugins/images/file/pp.png" class="img-thumbnail" alt="...">
+                                <img src="/plugins/images/file/pp.png" class="img-thumbnail" alt="...">
+                                <img src="/plugins/images/file/pp.png" class="img-thumbnail" alt="...">
+                                <img src="/plugins/images/file/pp.png" class="img-thumbnail" alt="...">
+                                <img src="/plugins/images/file/pp.png" class="img-thumbnail" alt="...">*@
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="NewResearchFiles" class="form-label">Thêm tệp đính kèm <span class="text-danger" asp-validation-for="NewResearchFiles"></span></label>
+                        <input asp-for="NewResearchFiles" type="file" class="form-control" multiple />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" onclick="UpdateSubmit()" class="btn btn-primary">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="extendModal" tabindex="-1" aria-labelledby="extendModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="extendModalLabel">Gia hạn Đề tài</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Chỉ hỗ trợ trạng thái đã bàn giao và đã bảo vệ, các đề tài đã nghiệm thu sẽ tự động bỏ qua</p>
+                <form id="ExtendForm" method="post" asp-action="Extend" asp-controller="Research">
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" id="years" name="years">
+                        <span class="input-group-text">Năm</span>
+                        <input type="number" class="form-control" id="months" name="months">
+                        <span class="input-group-text">Tháng</span>
+                        <input type="number" class="form-control" id="days" name="days">
+                        <span class="input-group-text">Ngày</span>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" onclick="ExtendSubmit()" class="btn btn-primary">Gia hạn</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">Thêm mới Đề tài</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="CreateForm" method="post" asp-action="Create" asp-controller="Research" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="Id" class="form-label">Mã đề tài <span class="text-danger" asp-validation-for="Id"></span></label>
+                        <input asp-for="Id" type="text" class="form-control" name="Id" id="Id" placeholder="DT0123456789">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Subject" class="form-label">Tiêu đề <span class="text-danger" asp-validation-for="Subject"></span></label>
+                        <textarea asp-for="Subject" type="text" class="form-control" name="Subject" id="Subject" placeholder="Nghiên cứu ABC XYZ">
+                        </textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="InstructorId" class="form-label">Chủ nhiệm<span class="text-danger" asp-validation-for="InstructorId"></span></label>
+                        <select asp-for="InstructorId" name="InstructorId" id="InstructorId" class="form-select" aria-label="Default select example">
+                            <option value="">Chọn chủ nhiệm</option>
+                            @foreach (var item in Model.Personals)
+                            {
+                                <option value="@item.Id">@item.Name - @item.Id</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Field" class="form-label">Lĩnh vực <span class="text-danger" asp-validation-for="Field"></span></label>
+                        <div class="dropdown">
+                            <input asp-for="Field" type="text" class="form-control dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" name="Field" id="Field" placeholder="Công nghệ thông tin">
+                            <ul class="dropdown-menu" aria-labelledby="">
+                                @foreach (var item in Model.Fields)
+                                {
+                                    <li><button type="button" onclick="selectFieldCreateForm('@item.Value')" class="dropdown-item">@item.Value</button></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Expense" class="form-label">Kinh phí <span class="text-danger" asp-validation-for="Expense"></span></label>
+                        <input asp-for="Expense" type="number" class="form-control" name="Expense" id="Expense" placeholder="1.000.000">
+                    </div>
+                    <div class="mb-3">
+                        <label for="DateStarted" class="form-label">Ngày bắt đầu <span class="text-danger" asp-validation-for="DateStarted"></span></label>
+                        <input asp-for="DateStarted" type="date" class="form-control" name="DateStarted" id="DateStarted">
+                    </div>
+                    <div class="mb-3">
+                        <label for="DateExpired" class="form-label">Ngày hết hạn <span class="text-danger" asp-validation-for="DateExpired"></span></label>
+                        <input asp-for="DateExpired" type="date" class="form-control" name="DateExpired" id="DateExpired">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Status" class="form-label">Trạng thái <span class="text-danger" asp-validation-for="Status"></span></label>
+                        <select asp-for="Status" name="Status" id="Status" class="form-select" aria-label="Default select example">
+                            <option value="">Chọn trạng thái</option>
+                            <option value="Handed">Đã bàn giao</option>
+                            <option value="Defended">Đã bảo vệ trước Hội đồng</option>
+                            <option value="Inspected">Đã nghiệm thu</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        @*<label class="form-label">File đính kèm</label>
+                            <button type="button" class="btn btn-outline-warning btn-sm">Xóa</button>
+                            <div>
+                            <label><img src="/plugins/images/file/pp.png" class="img-thumbnail" alt="..."></label>
+                            <img src="/plugins/images/file/pp.png" class="img-thumbnail" alt="...">
+                            <img src="/plugins/images/file/pp.png" class="img-thumbnail" alt="...">
+                            <img src="/plugins/images/file/pp.png" class="img-thumbnail" alt="...">
+                            <img src="/plugins/images/file/pp.png" class="img-thumbnail" alt="...">
+                            <img src="/plugins/images/file/pp.png" class="img-thumbnail" alt="...">
+                            <img src="/plugins/images/file/pp.png" class="img-thumbnail" alt="...">
+                            </div>*@
+                        <label for="NewResearchFiles" class="form-label">Thêm tệp đính kèm <span class="text-danger" asp-validation-for="NewResearchFiles"></span></label>
+                        <input asp-for="NewResearchFiles" type="file" class="form-control" multiple />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" onclick="CreateSubmit()" class="btn btn-primary">Tạo mới</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+<script>
+    function windowLoad(){
+        $("#Filter #Status").val("@Model.Status");
+        $("#Filter #PageSize").val("@Model.PageSize");
+        $("#Filter #Field").val("@Model.Field");
+        $("#Filter #Year").val("@Model.Year");
+    }
+    function selectFieldUpdateForm(value){
+        $("#UpdateForm #Field").val(value);
+    }
+    function selectFieldCreateForm(value){
+        $("#CreateForm #Field").val(value);
+    }
+    function selectPersonalUpdateForm(value){
+        $("#UpdateForm #InstructorId").val(value);
+    }
+    function selectPersonalCreateForm(value){
+        $("#CreateForm #InstructorId").val(value);
+    }
+    function CreateSubmit(){
+        if($("#CreateForm #Id").valid() && $("#CreateForm #Subject").valid() && $("#CreateForm #InstructorId").valid() && $("#CreateForm #Field").valid() && $("#CreateForm #Expense").valid() && $("#CreateForm #DateStarted").valid() && $("#CreateForm #DateExpired").valid() && $("#CreateForm #Status").valid()){
+        document.getElementById("CreateForm").submit();
+        }
+    }
+    function UpdateSubmit(){
+        if($("#UpdateForm #Id").valid() && $("#UpdateForm #Subject").valid() && $("#UpdateForm #InstructorId").valid() && $("#UpdateForm #Field").valid() && $("#UpdateForm #Expense").valid() && $("#UpdateForm #DateStarted").valid() && $("#UpdateForm #DateExpired").valid() && $("#UpdateForm #Status").valid()){
+        document.getElementById("UpdateForm").submit();
+        }
+    }
+    function openUpdateModal(Id, Subject, InstructorId, Field, Expense, DateStarted, DateExpired, Status,files){
+        document.getElementById("Id").value = Id;
+        document.getElementById("Subject").value = Subject;
+        document.getElementById("InstructorId").value = InstructorId;
+        $("#UpdateForm #Field").val(Field);
+        document.getElementById("Expense").value = Expense;
+        document.getElementById("DateStarted").value = DateStarted;
+        document.getElementById("DateExpired").value = DateExpired;
+        $("#UpdateForm #Status").val(Status);
+        if(files.length > 0){
+            showFiles(files);
+        }
+        var element = document.getElementById("activeDeleteFilesButton");
+        element.classList.remove("active");
+    }
+    function showFiles(files){
+        var element = "";
+        for(var i=0;i<files.length;i++){
+
+            element += "<label class='p-1 m-1' id='label"+files[i][0]+"' for='"+files[i][0]+"'><div class='text-center'style='width:200px;height:200px'><img src='"+files[i][3]+"' class='img-thumbnail img-fluid' alt='...'></div><br>";
+            //element += "<label class='p-1 m-1' id='label"+files[i][0]+"' for='"+files[i][0]+"'><img src='"+files[i][3]+"' class='img-thumbnail' alt='...'><br>";
+            element += "<h5 class='card-title mt-2'><a href='"+files[i][2]+"' download='"+files[i][4]+"'>"+files[i][1]+"</a></h5></label>";
+            element += "<input class='form-check-input' disabled hidden onchange='changeFileDeleted()' type='checkbox'' value='"+files[i][0]+"' name='DeleteFiles' id='"+files[i][0]+"'>";
+        }
+        document.getElementById("showFileLocation").innerHTML = element;
+    }
+    function selectDeleteFiles(){
+        var element = document.getElementById("activeDeleteFilesButton");
+        element.classList.toggle("active");
+        var listElements = document.getElementsByName("DeleteFiles");
+        for(var i=0;i<listElements.length;i++){
+            listElements[i].disabled = !listElements[i].disabled;
+        }
+    }
+    function changeFileDeleted(){
+        var listElements = document.getElementsByName("DeleteFiles");
+        for(var i=0;i<listElements.length;i++){
+            if(listElements[i].checked == true){
+                var id = listElements[i].id;
+                document.getElementById("label"+id).style.border = "1px solid";
+            }
+            else{
+                var id = listElements[i].id;
+                document.getElementById("label"+id).style.border = "";
+            }
+        }
+    }
+    function deleteRange() {
+        if (confirm("Xác nhận xóa!") == true) {
+            var form = document.createElement("form");
+
+            form.method = "POST";
+            form.action = "/Research/Delete";
+
+            document.getElementsByName("selectedResearches").forEach(e=>{
+                if(e.checked){
+                    var element = document.createElement("input");
+                element.name = "selectedResearches";
+                element.value = e.value;
+                element.type = 'hidden';
+                form.appendChild(element);
+                }
+            });
+
+            document.body.appendChild(form);
+
+            form.submit();
+        }
+    }
+
+    function ExtendSubmit() {
+            var form = document.getElementById("ExtendForm");
+
+            document.getElementsByName("selectedResearches").forEach(e=>{
+                if(e.checked){
+                    var element = document.createElement("input");
+                element.name = "selectedResearches";
+                element.value = e.value;
+                element.type = 'hidden';
+                form.appendChild(element);
+                }
+            });
+            form.submit();
+    }
+</script>
+}

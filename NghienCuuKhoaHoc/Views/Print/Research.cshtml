@@ -1,0 +1,212 @@
+﻿@{
+    Layout = null;
+}
+@model ResearchDetailViewModel
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+          content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Ample lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Ample admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+          content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Print - Nghiên cứu</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/plugins/images/favicon.png">
+    <!-- Custom CSS -->
+    <link href="/css/style.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+
+
+
+
+
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <!-- Row -->
+        <div class="row">
+
+            <!-- Column -->
+            <div class="card">
+                <div class="card-body">
+                    <form class="form-horizontal form-material">
+                        <h2>Đề tài</h2>
+                        <div class="col-md-12 p-0 row">
+                            <div class="form-group mb-4 col">
+                                <label class="col-md-6 p-0">Mã đề tài</label>
+                                <div class="col-md-6 border-bottom p-0">
+                                    @Model.Id
+                                </div>
+                            </div>
+                            <div class="form-group mb-4 col">
+                                <label class="col-md-6 p-0">Chủ nhiệm</label>
+                                <div class="col-md-6 border-bottom p-0">
+                                    @Model.DateExpired
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="col-md-12 p-0">Tên đề tài</label>
+                            <div class="col-md-12 border-bottom p-0">
+                                @Model.Subject
+                            </div>
+                        </div>
+                        <div class="col-md-12 p-0 row">
+                            <div class="form-group mb-4 col">
+                                <label class="col-md-6 p-0">Lĩnh vực</label>
+                                <div class="col-md-6 border-bottom p-0">
+                                    @Model.Field" 
+                                           
+                                </div>
+                            </div>
+                            <div class="form-group mb-4 col">
+                                <label class="col-md-6 p-0">Kinh phí</label>
+                                <div class="col-md-6 border-bottom p-0">
+                                    @Model.Expense" 
+                                           
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 p-0 row">
+                            <div class="form-group mb-4 col">
+                                <label class="col-md-6 p-0">Ngày bắt đầu</label>
+                                <div class="col-md-6 border-bottom p-0">
+                                    @Model.DateStarted" 
+                                           
+                                </div>
+                            </div>
+                            <div class="form-group mb-4 col">
+                                <label class="col-md-6 p-0">Ngày kết thúc</label>
+                                <div class="col-md-6 border-bottom p-0">
+                                    @Model.DateExpired" 
+                                           
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="col-md-6 p-0">Trạng thái</label>
+                            <div class="col-md-6 border-bottom p-0">
+                                @Model.Status.GetName()" 
+                                       
+                            </div>
+                        </div>
+                        <h2>Hội đồng nghiệm thu</h2>
+                        <div class="col-md-12 p-4 row border border-success">
+                            @if (Model.Chairman == null && Model.Commissioner1 == null && Model.Commissioner2 == null && Model.Secretary == null)
+                            {
+                                <text>Không có</text>
+                            }
+                            else
+                            {
+                                <div class="form-group mb-4 col-6">
+                                    <label class="col-md-6 p-0">Chủ tịch hội đồng</label>
+                                    <div class="col-md-6 border-bottom p-0">
+                                        @Model.Chairman" 
+                                           
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4 col-6">
+                                    <label class="col-md-6 p-0">Ủy viên</label>
+                                    <div class="col-md-6 border-bottom p-0">
+                                        @Model.Commissioner1" 
+                                           
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4 col-6">
+                                    <label class="col-md-6 p-0">Ủy viên</label>
+                                    <div class="col-md-6 border-bottom p-0">
+                                        @Model.Commissioner2" 
+                                           
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4 col-6">
+                                    <label class="col-md-6 p-0">Thư ký</label>
+                                    <div class="col-md-6 border-bottom p-0">
+                                        @Model.Secretary" 
+                                           
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <h2 class="mt-4">Nghiệm thu</h2>
+                        <div class="col-md-12 p-4 row border border-success">
+                            @if (Model.Score == null)
+                            {
+                                <text>Không có</text>
+                            }
+                            else
+                            {
+                                <div class="form-group mb-4 col-6">
+                                    <label class="col-md-6 p-0">Điểm số</label>
+                                    <div class="col-md-6 border-bottom p-0">
+                                        @Model.Score
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4 col-6">
+                                    <label class="col-md-6 p-0">Đánh giá</label>
+                                    <div class="col-md-6 border-bottom p-0">
+                                        @Model.Rate.GetName()
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/app-style-switcher.js"></script>
+    <script src="/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!--Wave Effects -->
+    <script src="/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="/js/custom.js"></script>
+    <!--This page JavaScript -->
+    <!--chartis chart-->
+    <script src="/plugins/bower_components/chartist/dist/chartist.min.js"></script>
+    <script src="/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="/js/pages/dashboards/dashboard1.js"></script>
+    <script>
+    window.onload = function() {
+        window.print();
+    }
+    </script>
+</body>
+
+</html>

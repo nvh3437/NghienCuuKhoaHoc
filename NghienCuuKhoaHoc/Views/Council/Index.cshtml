@@ -1,0 +1,451 @@
+﻿@{
+    ViewData["Title"] = "Hội đồng";
+}
+@model CouncilMemberViewModel
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb bg-white">
+    <div class="row align-items-center">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Hội đồng nghiệm thu</h4>
+        </div>
+        <div class="col-md-3 col-sm-4 col-xs-6 ms-auto">
+            <div class="dropdown float-end">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-align-left"></i> Công cụ
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li>
+                        <button type="button" onclick="openUpdateRange()" class=" dropdown-item" data-bs-toggle="modal" data-bs-target="#updateRangeModal">
+                            Cập nhật đã chọn
+                        </button>
+                    </li>
+
+                    <li><button id="deleteRange" onclick="deleteRange()" class="dropdown-item">Xóa đã chọn</button></li>
+                </ul>
+            </div>
+            <div class="dropdown float-end me-1">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class=" fas fa-"></i> Bộ lọc
+                </button>
+                <form id="Filter" name="Filter" method="get" action="/Council" class="dropdown-menu p-4" aria-labelledby="dropdownMenuButton1">
+                    <div class="mb-3">
+                        <label for="Field" class="form-label">Lĩnh vực</label>
+                        <select id="Field" name="Field" class="form-select" aria-label="Default select example" value="@Model.Field">
+                            <option value="">Tất cả</option>
+                            @foreach (var item in Model.Fields)
+                            {
+                                <option value="@item.Value">@item.Value</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Status" class="form-label">Trạng thái</label>
+                        <select id="Status" name="Status" class="form-select" aria-label="Default select example">
+                            <option value="">Tất cả</option>
+                            <option value="Handed">Đã bàn giao</option>
+                            <option value="Defended">Đã bảo vệ trước Hội đồng</option>
+                            <option value="Inspected">Đã nghiệm thu</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Year" class="form-label">Năm</label>
+                        <select id="Year" name="Year" class="form-select" aria-label="Default select example" value="@Model.Year">
+                            <option value="">Tất cả</option>
+                            @foreach (var item in Model.Years)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="PageSize" class="form-label">Hiển thị</label>
+                        <select id="PageSize" name="PageSize" class="form-select" aria-label="Default select example">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Thực hiện</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="white-box">
+                <div class="d-md-flex mb-3">
+                    <h3 class="box-title mb-0">Đề tài</h3>
+
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">Nghiên cứu</th>
+                                <th class="border-top-0">Chủ nhiệm</th>
+                                <th class="border-top-0">Lĩnh vực</th>
+                                <th class="border-top-0">Trạng thái</th>
+                                <th class="border-top-0">Ngày bắt đầu</th>
+                                <th class="border-top-0">Hội đồng</th>
+                                <th class="border-top-0">Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var item in Model.CouncilMembers)
+                                {
+                                    <tr>
+                                        <td class="txt-oflo">@item.ResearchId</td>
+                                        <td class="txt-oflo">@item.Instructor</td>
+                                        <td class="txt-oflo">@item.Field</td>
+                                        <td class="txt-oflo @item.Status.GetClass()">@item.Status.GetName()</td>
+                                        <td class="txt-oflo">@item.DateStarted</td>
+                                        <td class="txt-oflo @item.GetClass()">@item.GetCouncilStatus()</td>
+                                        <td>
+                                            <input class="form-check-input" type="checkbox" value="@item.ResearchId" name="selectedResearches" id="@item.ResearchId">
+                                            <button class="border-0" data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                onclick="openUpdateModal(
+                                                                '@item.ResearchId','@item.Chairman','@item.Commissioner1',
+                                                                '@item.Commissioner2','@item.Secretary',
+                                                                '@item.Subject', '@item.Instructor', '@item.DateStarted', '@item.DateExpired'
+                                                            )">
+                                                <i class=" far fa-edit"></i>
+                                            </button>
+                                            <a href="Research/Detail?Id=@item.ResearchId"><i class="  fas fa-info-circle"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    @Html.PagedListPager(
+                    Model.CouncilMembers,
+                    page => Url.Action("Index",new { Page = page, PageSize = Model.PageSize, Field = Model.Field, Status = Model.Status, FindKeyword = Model.FindKeyword }),
+                    new PagedListRenderOptions()
+                    {
+                    ActiveLiElementClass = "bg-info text-light px-1",
+                    MaximumPageNumbersToDisplay = 5,
+                    ContainerDivClasses = new List<string>{"product__pagination"},
+                    LinkToPreviousPageFormat = "<i class=' fas fa-angle-left'></i>",
+                    LinkToNextPageFormat = "<i class=' fas fa-angle-right'></i>",
+                    LinkToFirstPageFormat = "<i class='fas fa-angle-double-left'></i>",
+                    LinkToLastPageFormat = "<i class='fas fa-angle-double-right'></i>",
+                    LiElementClasses = new List<string>{"me-3"},
+
+                    })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="updateRangeModal" tabindex="-1" aria-labelledby="updateRangeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateRangeModalLabel">Cập nhật Đề tài</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="updateRangeForm" method="post" asp-action="UpdateRange" asp-controller="Council" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="ResearchId" class="form-label">Mã đề tài <span class="text-danger" asp-validation-for="ResearchId"></span></label>
+                        <div id="describe">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Chairman" class="form-label">Chủ tịch Hội đồng<span class="text-danger" asp-validation-for="Chairman"></span></label>
+                        <select onchange="disableMemberUpdateRange()" asp-for="Chairman" name="Chairman" id="Chairman" class="form-select" aria-label="Default select example">
+                            <option value="">Chọn thành viên hội đồng</option>
+                            @foreach (var item in Model.Personals)
+                            {
+                                <option value="@item.Id">@item.Name - @item.Id</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Commissioner1" class="form-label">Ủy viên<span class="text-danger" asp-validation-for="Commissioner1"></span></label>
+                        <select onchange="disableMemberUpdateRange()" asp-for="Commissioner1" name="Commissioner1" id="Commissioner1" class="form-select" aria-label="Default select example">
+                            <option value="">Chọn thành viên hội đồng</option>
+                            @foreach (var item in Model.Personals)
+                            {
+                                <option value="@item.Id">@item.Name - @item.Id</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Commissioner2" class="form-label">Ủy viên<span class="text-danger" asp-validation-for="Commissioner2"></span></label>
+                        <select onchange="disableMemberUpdateRange()" asp-for="Commissioner2" name="Commissioner2" id="Commissioner2" class="form-select" aria-label="Default select example">
+                            <option value="">Chọn thành viên hội đồng</option>
+                            @foreach (var item in Model.Personals)
+                            {
+                                <option value="@item.Id">@item.Name - @item.Id</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Secretary" class="form-label">Thư ký<span class="text-danger" asp-validation-for="Secretary"></span></label>
+                        <select onchange="disableMemberUpdateRange()" asp-for="Secretary" name="Secretary" id="Secretary" class="form-select" aria-label="Default select example">
+                            <option value="">Chọn thành viên hội đồng</option>
+                            @foreach (var item in Model.Personals)
+                            {
+                                <option value="@item.Id">@item.Name - @item.Id</option>
+                            }
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" onclick="UpdateRangeSubmit()" class="btn btn-primary">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">Cập nhật Đề tài</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="UpdateForm" method="post" asp-action="Update" asp-controller="Council" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="ResearchId" class="form-label">Mã đề tài <span class="text-danger" asp-validation-for="ResearchId"></span></label>
+                        <input asp-for="ResearchId" type="text" class="form-control" name="ResearchId" id="ResearchId" readonly placeholder="DT0123456789">
+                        <div id="describeUpdate">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Chairman" class="form-label">Chủ tịch Hội đồng<span class="text-danger" asp-validation-for="Chairman"></span></label>
+                        <select onchange="disableMemberUpdate()" asp-for="Chairman" name="Chairman" id="Chairman" class="form-select" aria-label="Default select example">
+                            <option value="">Chọn thành viên hội đồng</option>
+                            @foreach (var item in Model.Personals)
+                            {
+                                <option value="@item.Id">@item.Name - @item.Id</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Commissioner1" class="form-label">Ủy viên<span class="text-danger" asp-validation-for="Commissioner1"></span></label>
+                        <select onchange="disableMemberUpdate()" asp-for="Commissioner1" name="Commissioner1" id="Commissioner1" class="form-select" aria-label="Default select example">
+                            <option value="">Chọn thành viên hội đồng</option>
+                            @foreach (var item in Model.Personals)
+                            {
+                                <option value="@item.Id">@item.Name - @item.Id</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Commissioner2" class="form-label">Ủy viên<span class="text-danger" asp-validation-for="Commissioner2"></span></label>
+                        <select onchange="disableMemberUpdate()" asp-for="Commissioner2" name="Commissioner2" id="Commissioner2" class="form-select" aria-label="Default select example">
+                            <option value="">Chọn thành viên hội đồng</option>
+                            @foreach (var item in Model.Personals)
+                            {
+                                <option value="@item.Id">@item.Name - @item.Id</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Secretary" class="form-label">Thư ký<span class="text-danger" asp-validation-for="Secretary"></span></label>
+                        <select onchange="disableMemberUpdate()" asp-for="Secretary" name="Secretary" id="Secretary" class="form-select" aria-label="Default select example">
+                            <option value="">Chọn thành viên hội đồng</option>
+                            @foreach (var item in Model.Personals)
+                            {
+                                <option value="@item.Id">@item.Name - @item.Id</option>
+                            }
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" onclick="UpdateSubmit()" class="btn btn-primary">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+<script>
+    function windowLoad(){
+        $("#Filter #Status").val("@Model.Status");
+        $("#Filter #Field").val("@Model.Field");
+        $("#Filter #PageSize").val("@Model.PageSize");
+        $("#Filter #Year").val("@Model.Year");
+        //$("#updateRangeForm #Chairman option[value='']").attr("disabled",true);
+        //$("#updateRangeForm #Chairman option").each(function() {
+        //    var $thisOption = $(this);
+        //    $thisOption.attr("disabled", false);
+        //}
+    }
+    function UpdateSubmit(){
+        document.getElementById("UpdateForm").submit();
+    }
+    function UpdateRangeSubmit(){
+        document.getElementById("updateRangeForm").submit();
+    }
+    function openUpdateModal(ResearchId ,Chairman ,Commissioner1 ,Commissioner2 ,Secretary, Subject, Instructor, DateStarted, DateExpired){
+        $("#UpdateForm #ResearchId").val(ResearchId);
+        $("#UpdateForm #Chairman").val(Chairman);
+        $("#UpdateForm #Commissioner1").val(Commissioner1);
+        $("#UpdateForm #Commissioner2").val(Commissioner2);
+        $("#UpdateForm #Secretary").val(Secretary);
+        var div = document.getElementById('describeUpdate');
+        div.innerHTML = "Tiêu đề: "+Subject +"<br>Chủ nhiệm: "+Instructor+"<br>Ngày bắt đầu: "+DateStarted+"<br>Hết hạn: "+DateExpired;
+        disableMemberUpdate();
+    }
+    function openUpdateRange(){
+
+        var div = document.getElementById('describe');
+        var str = "";
+        document.getElementsByName("selectedResearches").forEach(e=>{
+                if(e.checked){
+                    str += "ID: <strong>"+e.value+"</strong><input type='text' hidden name='selectedResearches' value='"+e.value+"'><br>";
+                }
+            });
+        div.innerHTML = str;
+    }
+
+    function deleteRange() {
+        if (confirm("Xác nhận xóa!") == true) {
+            var form = document.createElement("form");
+
+            form.method = "POST";
+            form.action = "/Council/Delete";
+
+            document.getElementsByName("selectedResearches").forEach(e=>{
+                if(e.checked){
+                    var element = document.createElement("input");
+                element.name = "selectedResearches";
+                element.value = e.value;
+                element.type = 'hidden';
+                form.appendChild(element);
+                }
+            });
+
+            document.body.appendChild(form);
+
+            form.submit();
+        }
+    }
+    function disableMemberUpdateRange(){
+        var chairman = $("#updateRangeForm #Chairman").val();
+        var Commissioner1 = $("#updateRangeForm #Commissioner1").val();
+        var Commissioner2 = $("#updateRangeForm #Commissioner2").val();
+        var Secretary = $("#updateRangeForm #Secretary").val();
+
+        $("#updateRangeForm #Commissioner1 option").each(function() {
+            var $thisOption = $(this);
+            if($thisOption.val() == chairman || $thisOption.val() == Commissioner2 || $thisOption.val() == Secretary) {
+                $thisOption.attr("disabled", true);
+            }
+            else
+            {
+                $thisOption.attr("disabled", false);
+            }
+        });
+        $("#updateRangeForm #Commissioner2 option").each(function() {
+            var $thisOption = $(this);
+            if($thisOption.val() == chairman || $thisOption.val() == Commissioner1 || $thisOption.val() == Secretary) {
+                $thisOption.attr("disabled", true);
+            }
+            else
+            {
+                $thisOption.attr("disabled", false);
+            }
+        });
+        $("#updateRangeForm #Chairman option").each(function() {
+            var $thisOption = $(this);
+            if($thisOption.val() == Commissioner1 || $thisOption.val() == Commissioner2 || $thisOption.val() == Secretary) {
+                $thisOption.attr("disabled", true);
+            }
+            else
+            {
+                $thisOption.attr("disabled", false);
+            }
+        });
+        $("#updateRangeForm #Secretary option").each(function() {
+            var $thisOption = $(this);
+            if($thisOption.val() == chairman || $thisOption.val() == Commissioner1 || $thisOption.val() == Commissioner2) {
+                $thisOption.attr("disabled", true);
+            }
+            else
+            {
+                $thisOption.attr("disabled", false);
+            }
+        });
+    }
+    function disableMemberUpdate(){
+        var chairman = $("#UpdateForm #Chairman").val();
+        var Commissioner1 = $("#UpdateForm #Commissioner1").val();
+        var Commissioner2 = $("#UpdateForm #Commissioner2").val();
+        var Secretary = $("#UpdateForm #Secretary").val();
+
+        $("#UpdateForm #Commissioner1 option").each(function() {
+            var $thisOption = $(this);
+            if($thisOption.val() == chairman || $thisOption.val() == Commissioner2 || $thisOption.val() == Secretary) {
+                $thisOption.attr("disabled", true);
+            }
+            else
+            {
+                $thisOption.attr("disabled", false);
+            }
+        });
+        $("#UpdateForm #Commissioner2 option").each(function() {
+            var $thisOption = $(this);
+            if($thisOption.val() == chairman || $thisOption.val() == Commissioner1 || $thisOption.val() == Secretary) {
+                $thisOption.attr("disabled", true);
+            }
+            else
+            {
+                $thisOption.attr("disabled", false);
+            }
+        });
+        $("#UpdateForm #Chairman option").each(function() {
+            var $thisOption = $(this);
+            if($thisOption.val() == Commissioner1 || $thisOption.val() == Commissioner2 || $thisOption.val() == Secretary) {
+                $thisOption.attr("disabled", true);
+            }
+            else
+            {
+                $thisOption.attr("disabled", false);
+            }
+        });
+        $("#UpdateForm #Secretary option").each(function() {
+            var $thisOption = $(this);
+            if($thisOption.val() == chairman || $thisOption.val() == Commissioner1 || $thisOption.val() == Commissioner2) {
+                $thisOption.attr("disabled", true);
+            }
+            else
+            {
+                $thisOption.attr("disabled", false);
+            }
+        });
+    }
+
+</script>
+}
+@section Styles{
+<style>
+    select option:disabled {
+        background-color: grey;
+    }
+</style>
+}

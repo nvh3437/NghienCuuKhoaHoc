@@ -1,0 +1,215 @@
+﻿@{
+    ViewData["Title"] = "Tài khoản";
+}
+@model AccountViewModel
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb bg-white">
+    <div class="row align-items-center">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Quản lý tài khoản</h4>
+            
+        </div>
+        <div class="col-md-3 col-sm-4 col-xs-6 ms-auto">
+                <div class="dropdown float-end">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-align-left"></i> Công cụ
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <button type="button" class=" dropdown-item" data-bs-toggle="modal" data-bs-target="#createModal">
+                                Thêm mới
+                            </button>
+                        </li>
+
+                        <li><button id="deleteRange" onclick="deleteRange()" class="dropdown-item">Xóa đã chọn</button></li>
+                    </ul>
+                </div>
+            </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="white-box">
+                <div class="d-md-flex mb-3">
+                    <h3 class="box-title mb-0">Tài khoản</h3>
+
+                </div>
+                <div class="table-responsive">
+                    <table class="table no-wrap">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">#</th>
+                                <th class="border-top-0">Tên đăng nhập</th>
+                                <th class="border-top-0">Email</th>
+                                <th class="border-top-0">Chọn</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = 0;
+                                foreach (var item in Model.Accounts)
+                                {
+                                    <tr>
+                                        <td>@(i++)</td>
+                                        <td class="txt-oflo">@item.UserName@if (item.Admin == true) {<text> <i class="fas fa-user-secret text-danger"></i></text> }</td>
+                                        <td>@item.Email</td>
+                                        <td>
+                                            <input class="form-check-input" type="checkbox" value="@item.Id" name="selectedAccounts" id="@item.Id">
+                                            <button class="border-0" data-bs-toggle="modal" data-bs-target="#updateModal" onclick="openUpdateModal('@item.Id', '@item.UserName', '@item.Email', '@item.Admin')"><i class=" far fa-edit"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">Cập nhật Tài khoản</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="UpdateForm" method="post" asp-action="Update" asp-controller="Account">
+                    <div class="mb-3">
+                        <label for="UserName" class="form-label">Tên đăng nhập <span class="text-danger" asp-validation-for="UserName"></span></label>
+                        <input asp-for="UserName" type="text" class="form-control" name="UserName" id="UserName" placeholder="UserName">
+                        <input asp-for="Id" type="text" class="form-control" name="Id" id="Id" readonly hidden>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Email" class="form-label">Email <span class="text-danger" asp-validation-for="Email"></span></label>
+                        <input asp-for="Email" type="email" class="form-control" name="Email" id="Email" placeholder="Example@email.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="RePassword" class="form-label">
+                            Mật khẩu 
+                            <button type="button" onclick="ChangePass()" id="activeChangePassButton" class="btn btn-outline-warning btn-sm">
+                                Đặt lại
+                            </button>&nbsp
+                            <span class="text-danger" asp-validation-for="RePassword"></span>
+                        </label>
+                        <input asp-for="RePassword" type="password" class="form-control" name="RePassword" disabled id="RePassword">
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" value="true" type="checkbox" id="Admin" name="Admin">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Tài khoản Admin</label>
+                    </div>
+                    Yêu cầu tối thiểu 1 tài khoản Admin
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" onclick="UpdateSubmit()" class="btn btn-primary">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">Thêm mới Tài khoản</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="CreateForm" method="post" asp-action="Create" asp-controller="Account">
+                    <div class="mb-3">
+                        <label for="UserName" class="form-label">Tên đăng nhập <span class="text-danger" asp-validation-for="UserName"></span></label>
+                        <input asp-for="UserName" type="text" class="form-control" name="UserName" id="UserName" placeholder="UserName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Email" class="form-label">Email <span class="text-danger" asp-validation-for="Email"></span></label>
+                        <input asp-for="Email" type="email" class="form-control" name="Email" id="Email" placeholder="Example@email.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Password" class="form-label">
+                            Mật khẩu <span class="text-danger" asp-validation-for="Password"></span>
+                        </label>
+                        <input asp-for="Password" type="password" class="form-control" name="Password" id="Password">
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" value="true" id="Admin" name="Admin">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Tài khoản Admin</label>
+                    </div>
+                    Yêu cầu tối thiểu 1 tài khoản Admin
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" onclick="CreateSubmit()" class="btn btn-primary">Tạo mới</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+<script>
+    function windowLoad(){}
+    function CreateSubmit(){
+        if($("#CreateForm #Password").valid() && $("#CreateForm #UserName").valid() && $("#CreateForm #Email").valid()){
+        document.getElementById("CreateForm").submit();}
+    }
+    function UpdateSubmit(){
+        if($("#UpdateForm #Id").valid() && $("#UpdateForm #RePassword").valid() && $("#UpdateForm #UserName").valid() && $("#UpdateForm #Email").valid()){
+        document.getElementById("UpdateForm").submit();}
+    }
+    function openUpdateModal(id, username, email, admin){
+        document.getElementById("Id").value = id;
+        document.getElementById("UserName").value = username;
+        document.getElementById("Email").value = email;
+        if(admin == 'True' ){
+            document.getElementById("Admin").checked = true;
+        }
+        else{
+            document.getElementById("Admin").checked = false;
+        }
+    }
+    function ChangePass(){
+        var element = document.getElementById("activeChangePassButton");
+        element.classList.toggle("active");
+        var Password = document.getElementById("RePassword");
+        Password.disabled = !Password.disabled;
+    }
+    function deleteRange() {
+        if (confirm("Yêu cầu tối thiểu phải có 1 tài khoản Admin - Xác nhận xóa!") == true) {
+            var form = document.createElement("form");
+
+            form.method = "POST";
+            form.action = "/Account/Delete";
+
+            document.getElementsByName("selectedAccounts").forEach(e=>{
+                if(e.checked){
+                    var element = document.createElement("input");
+                element.name = "selectedAccounts";
+                element.value = e.value;
+                element.type = 'hidden';
+                form.appendChild(element);
+                }
+            });
+
+            document.body.appendChild(form);
+
+            form.submit();
+        }
+    }
+</script>
+}

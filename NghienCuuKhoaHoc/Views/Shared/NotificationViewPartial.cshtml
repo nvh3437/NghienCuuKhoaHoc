@@ -1,0 +1,39 @@
+﻿@using NghienCuuKhoaHoc.Services
+@model Notification
+<div class="toast align-items-center notification fixed-bottom ms-2 mb-2" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex @Model.GetClass()">
+        <div class="toast-body">
+            @Model.Message
+        </div>
+        <button id="close-notifi" type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
+
+@*<div class="toast notification fixed-bottom ml-2">
+    <div class="toast-body alert alert-danger mb-0">
+    <button id="close-notifi" type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+    <i class="nc-icon nc-simple-remove"></i>
+    </button>
+    <span></span>
+    </div>
+    </div>*@
+<script>
+      
+    function LoadNotify() {
+      var toastElList = [].slice.call(document.querySelectorAll('.notification'));
+      var toastList = toastElList.map(function(toastEl) {
+        return new bootstrap.Toast(toastEl,{
+            delay: 3000
+        });
+      })
+      toastList.forEach(toast => toast.show());
+      windowLoad();
+    }
+    document.getElementById("close-notifi").onclick = function() {
+      var toastElList = [].slice.call(document.querySelectorAll('.notification'));
+      var toastList = toastElList.map(function(toastEl) {
+        return new bootstrap.Toast(toastEl);
+      })
+      toastList.forEach(toast => toast.hide());
+    }
+</script>

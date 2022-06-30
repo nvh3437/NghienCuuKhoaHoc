@@ -1,0 +1,1062 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\plugins\bower_components\chartist-plugin-tooltips\dist\chartist-plugin-tooltip.css" />
+    <Content Include="wwwroot\plugins\bower_components\chartist\dist\chartist.min.css" />
+    <Content Include="wwwroot\plugins\bower_components\perfect-scrollbar\dist\css\perfect-scrollbar.min.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="3.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MimeKit" Version="3.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="X.PagedList" Version="8.4.3" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="wwwroot\bootstrap\dist\.DS_Store" />
+    <None Include="wwwroot\bootstrap\dist\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\bootstrap\dist\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\bootstrap\dist\css\bootstrap-grid.rtl.css.map" />
+    <None Include="wwwroot\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map" />
+    <None Include="wwwroot\bootstrap\dist\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\bootstrap\dist\css\bootstrap-reboot.rtl.css.map" />
+    <None Include="wwwroot\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map" />
+    <None Include="wwwroot\bootstrap\dist\css\bootstrap-utilities.css.map" />
+    <None Include="wwwroot\bootstrap\dist\css\bootstrap-utilities.min.css.map" />
+    <None Include="wwwroot\bootstrap\dist\css\bootstrap-utilities.rtl.css.map" />
+    <None Include="wwwroot\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map" />
+    <None Include="wwwroot\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\bootstrap\dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\bootstrap\dist\css\bootstrap.rtl.css.map" />
+    <None Include="wwwroot\bootstrap\dist\css\bootstrap.rtl.min.css.map" />
+    <None Include="wwwroot\bootstrap\dist\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\bootstrap\dist\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\bootstrap\dist\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\bootstrap\dist\js\bootstrap.esm.js" />
+    <None Include="wwwroot\bootstrap\dist\js\bootstrap.esm.js.map" />
+    <None Include="wwwroot\bootstrap\dist\js\bootstrap.esm.min.js" />
+    <None Include="wwwroot\bootstrap\dist\js\bootstrap.esm.min.js.map" />
+    <None Include="wwwroot\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\bootstrap\dist\js\bootstrap.js.map" />
+    <None Include="wwwroot\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\bootstrap\dist\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\css\.DS_Store" />
+    <None Include="wwwroot\css\icons\.DS_Store" />
+    <None Include="wwwroot\css\icons\font-awesome\less\fa-brands.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\fa-regular.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\fa-solid.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\fontawesome.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_animated.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_bordered-pulled.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_core.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_fixed-width.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_icons.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_larger.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_list.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_mixins.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_rotated-flipped.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_screen-reader.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_stacked.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_variables.less" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\fa-brands.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\fa-regular.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\fa-solid.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\fontawesome.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_animated.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_bordered-pulled.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_core.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_fixed-width.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_icons.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_larger.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_list.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_mixins.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_rotated-flipped.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_screen-reader.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_stacked.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_variables.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\css\icons\font-awesome\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\css\icons\font-awesome\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\css\icons\font-awesome\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\css\icons\font-awesome\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\css\icons\font-awesome\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\css\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.svg" />
+    <None Include="wwwroot\css\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.woff2" />
+    <None Include="wwwroot\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.svg" />
+    <None Include="wwwroot\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.woff2" />
+    <None Include="wwwroot\css\icons\themify-icons\fonts\themify.svg" />
+    <None Include="wwwroot\css\icons\themify-icons\ie7\ie7.js" />
+    <None Include="wwwroot\css\icons\themify-icons\themify-icons.less" />
+    <None Include="wwwroot\css\icons\weather-icons\fonts\weathericons-regular-webfont.svg" />
+    <None Include="wwwroot\css\icons\weather-icons\fonts\weathericons-regular-webfont.woff2" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-beaufort.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-day.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-direction.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-misc.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-moon-aliases.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-moon.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-neutral.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-night.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-time.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-wind-aliases.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-wind-degrees.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-wind.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-beaufort.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-day.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-direction.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-misc.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-moon.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-neutral.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-night.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-time.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-wind-names.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\mappings\wi-forecast-io.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\mappings\wi-owm.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\mappings\wi-wmo4680.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\mappings\wi-yahoo.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\weather-icons-classes.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\weather-icons-core.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\weather-icons-variables.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\weather-icons-wind.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\weather-icons-wind.min.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\weather-icons.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\weather-icons.min.less" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-beaufort.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-day.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-direction.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-misc.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-moon-aliases.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-moon.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-neutral.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-night.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-time.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-wind-aliases.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-wind-degrees.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-wind.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-beaufort.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-day.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-direction.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-misc.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-moon.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-neutral.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-night.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-time.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-wind-names.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\mappings\wi-forecast-io.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\mappings\wi-owm.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\mappings\wi-wmo4680.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\mappings\wi-yahoo.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\weather-icons-classes.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\weather-icons-core.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\weather-icons-variables.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\weather-icons-wind.min.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\weather-icons-wind.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\weather-icons.min.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\weather-icons.scss" />
+    <None Include="wwwroot\js\app-style-switcher.js" />
+    <None Include="wwwroot\js\custom.js" />
+    <None Include="wwwroot\js\pages\dashboards\dashboard1.js" />
+    <None Include="wwwroot\js\sidebarmenu.js" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\waves.js" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\less\animated.less" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\less\core.less" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\less\icons.less" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\less\larger.less" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\less\list.less" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\less\mixins.less" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\less\path.less" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\less\stacked.less" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\less\variables.less" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <None Include="wwwroot\login\fonts\font-awesome-4.7.0\scss\_variables.scss" />
+    <None Include="wwwroot\login\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\login\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\login\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\login\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\login\vendor\bootstrap\css\bootstrap.css.map" />
+    <None Include="wwwroot\login\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\login\vendor\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\login\vendor\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\login\vendor\bootstrap\js\popper.js" />
+    <None Include="wwwroot\login\vendor\bootstrap\js\popper.min.js" />
+    <None Include="wwwroot\login\vendor\bootstrap\js\tooltip.js" />
+    <None Include="wwwroot\login\vendor\jquery\jquery-3.2.1.min.js" />
+    <None Include="wwwroot\login\vendor\select2\select2.js" />
+    <None Include="wwwroot\login\vendor\select2\select2.min.js" />
+    <None Include="wwwroot\login\vendor\tilt\tilt.jquery.min.js" />
+    <None Include="wwwroot\plugins\.DS_Store" />
+    <None Include="wwwroot\plugins\bower_components\.DS_Store" />
+    <None Include="wwwroot\plugins\bower_components\chartist-plugin-tooltips\dist\chartist-plugin-tooltip.min.js" />
+    <None Include="wwwroot\plugins\bower_components\chartist\dist\chartist.min.js" />
+    <None Include="wwwroot\plugins\bower_components\counterup\jquery.counterup.min.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\gmaps.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\gmaps.min.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\gmaps.min.js.map" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\jquery.gmaps.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.controls.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.core.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.events.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.geofences.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.geometry.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.layers.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.map_types.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.markers.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.native_extensions.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.overlays.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.routes.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.static.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.streetview.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.styles.js" />
+    <None Include="wwwroot\plugins\bower_components\gmaps\lib\gmaps.utils.js" />
+    <None Include="wwwroot\plugins\bower_components\jquery-sparkline\jquery.charts-sparkline.js" />
+    <None Include="wwwroot\plugins\bower_components\jquery-sparkline\jquery.sparkline.min.js" />
+    <None Include="wwwroot\plugins\bower_components\jquery\dist\core.js" />
+    <None Include="wwwroot\plugins\bower_components\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\plugins\bower_components\jquery\dist\jquery.slim.min.js" />
+    <None Include="wwwroot\plugins\bower_components\perfect-scrollbar\dist\js\perfect-scrollbar.jquery.min.js" />
+    <None Include="wwwroot\plugins\bower_components\perfect-scrollbar\dist\js\perfect-scrollbar.min.js" />
+    <None Include="wwwroot\plugins\bower_components\perfect-scrollbar\dist\perfect-scrollbar.common.js" />
+    <None Include="wwwroot\plugins\bower_components\perfect-scrollbar\dist\perfect-scrollbar.esm.js" />
+    <None Include="wwwroot\plugins\bower_components\perfect-scrollbar\dist\perfect-scrollbar.jquery.min.js" />
+    <None Include="wwwroot\plugins\bower_components\perfect-scrollbar\dist\perfect-scrollbar.min.js" />
+    <None Include="wwwroot\plugins\bower_components\popper.js\dist\esm\popper-utils.min.js" />
+    <None Include="wwwroot\plugins\bower_components\popper.js\dist\esm\popper.min.js" />
+    <None Include="wwwroot\plugins\bower_components\popper.js\dist\popper-utils.min.js" />
+    <None Include="wwwroot\plugins\bower_components\popper.js\dist\popper.min.js" />
+    <None Include="wwwroot\plugins\bower_components\popper.js\dist\umd\popper-utils.min.js" />
+    <None Include="wwwroot\plugins\bower_components\popper.js\dist\umd\popper.min.js" />
+    <None Include="wwwroot\plugins\images\.DS_Store" />
+    <None Include="wwwroot\scss\.DS_Store" />
+    <None Include="wwwroot\scss\bootstrap\.DS_Store" />
+    <None Include="wwwroot\scss\bootstrap\bootstrap-grid.scss" />
+    <None Include="wwwroot\scss\bootstrap\bootstrap-reboot.scss" />
+    <None Include="wwwroot\scss\bootstrap\bootstrap-utilities.scss" />
+    <None Include="wwwroot\scss\bootstrap\bootstrap.scss" />
+    <None Include="wwwroot\scss\bootstrap\forms\_floating-labels.scss" />
+    <None Include="wwwroot\scss\bootstrap\forms\_form-check.scss" />
+    <None Include="wwwroot\scss\bootstrap\forms\_form-control.scss" />
+    <None Include="wwwroot\scss\bootstrap\forms\_form-range.scss" />
+    <None Include="wwwroot\scss\bootstrap\forms\_form-select.scss" />
+    <None Include="wwwroot\scss\bootstrap\forms\_form-text.scss" />
+    <None Include="wwwroot\scss\bootstrap\forms\_input-group.scss" />
+    <None Include="wwwroot\scss\bootstrap\forms\_labels.scss" />
+    <None Include="wwwroot\scss\bootstrap\forms\_validation.scss" />
+    <None Include="wwwroot\scss\bootstrap\helpers\_clearfix.scss" />
+    <None Include="wwwroot\scss\bootstrap\helpers\_colored-links.scss" />
+    <None Include="wwwroot\scss\bootstrap\helpers\_position.scss" />
+    <None Include="wwwroot\scss\bootstrap\helpers\_ratio.scss" />
+    <None Include="wwwroot\scss\bootstrap\helpers\_stretched-link.scss" />
+    <None Include="wwwroot\scss\bootstrap\helpers\_text-truncation.scss" />
+    <None Include="wwwroot\scss\bootstrap\helpers\_visually-hidden.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_alert.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_border-radius.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_box-shadow.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_breakpoints.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_buttons.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_caret.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_clearfix.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_container.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_deprecate.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_forms.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_gradients.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_grid.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_image.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_list-group.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_lists.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_pagination.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_reset-text.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_resize.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_table-variants.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_text-truncate.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_transition.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_utilities.scss" />
+    <None Include="wwwroot\scss\bootstrap\mixins\_visually-hidden.scss" />
+    <None Include="wwwroot\scss\bootstrap\utilities\_api.scss" />
+    <None Include="wwwroot\scss\bootstrap\vendor\_rfs.scss" />
+    <None Include="wwwroot\scss\bootstrap\_accordion.scss" />
+    <None Include="wwwroot\scss\bootstrap\_alert.scss" />
+    <None Include="wwwroot\scss\bootstrap\_badge.scss" />
+    <None Include="wwwroot\scss\bootstrap\_breadcrumb.scss" />
+    <None Include="wwwroot\scss\bootstrap\_button-group.scss" />
+    <None Include="wwwroot\scss\bootstrap\_buttons.scss" />
+    <None Include="wwwroot\scss\bootstrap\_card.scss" />
+    <None Include="wwwroot\scss\bootstrap\_carousel.scss" />
+    <None Include="wwwroot\scss\bootstrap\_close.scss" />
+    <None Include="wwwroot\scss\bootstrap\_containers.scss" />
+    <None Include="wwwroot\scss\bootstrap\_dropdown.scss" />
+    <None Include="wwwroot\scss\bootstrap\_forms.scss" />
+    <None Include="wwwroot\scss\bootstrap\_functions.scss" />
+    <None Include="wwwroot\scss\bootstrap\_grid.scss" />
+    <None Include="wwwroot\scss\bootstrap\_helpers.scss" />
+    <None Include="wwwroot\scss\bootstrap\_images.scss" />
+    <None Include="wwwroot\scss\bootstrap\_list-group.scss" />
+    <None Include="wwwroot\scss\bootstrap\_mixins.scss" />
+    <None Include="wwwroot\scss\bootstrap\_modal.scss" />
+    <None Include="wwwroot\scss\bootstrap\_nav.scss" />
+    <None Include="wwwroot\scss\bootstrap\_navbar.scss" />
+    <None Include="wwwroot\scss\bootstrap\_pagination.scss" />
+    <None Include="wwwroot\scss\bootstrap\_popover.scss" />
+    <None Include="wwwroot\scss\bootstrap\_progress.scss" />
+    <None Include="wwwroot\scss\bootstrap\_reboot.scss" />
+    <None Include="wwwroot\scss\bootstrap\_root.scss" />
+    <None Include="wwwroot\scss\bootstrap\_spinners.scss" />
+    <None Include="wwwroot\scss\bootstrap\_tables.scss" />
+    <None Include="wwwroot\scss\bootstrap\_toasts.scss" />
+    <None Include="wwwroot\scss\bootstrap\_tooltip.scss" />
+    <None Include="wwwroot\scss\bootstrap\_transitions.scss" />
+    <None Include="wwwroot\scss\bootstrap\_type.scss" />
+    <None Include="wwwroot\scss\bootstrap\_utilities.scss" />
+    <None Include="wwwroot\scss\bootstrap\_variables.scss" />
+    <None Include="wwwroot\scss\components.scss" />
+    <None Include="wwwroot\scss\core\.DS_Store" />
+    <None Include="wwwroot\scss\core\animation\animation.scss" />
+    <None Include="wwwroot\scss\core\breadcrumb\breadcrumb.scss" />
+    <None Include="wwwroot\scss\core\buttons\buttons.scss" />
+    <None Include="wwwroot\scss\core\core.scss" />
+    <None Include="wwwroot\scss\core\extra\extra.scss" />
+    <None Include="wwwroot\scss\core\layout\layout.scss" />
+    <None Include="wwwroot\scss\core\loader\spinner.scss" />
+    <None Include="wwwroot\scss\core\scafholdings\scafholding.scss" />
+    <None Include="wwwroot\scss\core\sidebar\sidebar.scss" />
+    <None Include="wwwroot\scss\core\topbar\header.scss" />
+    <None Include="wwwroot\scss\core\topbar\notify.scss" />
+    <None Include="wwwroot\scss\core\wave-effects\wave-effects.scss" />
+    <None Include="wwwroot\scss\custom.scss" />
+    <None Include="wwwroot\scss\mixins\padding-margin.scss" />
+    <None Include="wwwroot\scss\responsive.scss" />
+    <None Include="wwwroot\scss\style.scss" />
+    <None Include="wwwroot\scss\theme-colors\theme-colors.scss" />
+    <None Include="wwwroot\scss\variable.scss" />
+    <None Include="wwwroot\scss\widgets\comments.scss" />
+    <None Include="wwwroot\scss\widgets\feeds.scss" />
+    <None Include="wwwroot\scss\widgets\profile.scss" />
+    <None Include="wwwroot\scss\widgets\steamline.scss" />
+    <None Include="wwwroot\scss\widgets\widgets.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\css\.DS_Store">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\.DS_Store">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\css\fa-brands.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\css\fa-brands.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\css\fa-regular.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\css\fa-regular.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\css\fa-solid.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\css\fa-solid.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\css\fontawesome-all.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\css\fontawesome-all.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\css\fontawesome.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\css\fontawesome.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\less\fa-brands.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\less\fa-regular.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\less\fa-solid.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\less\fontawesome.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\less\_animated.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\less\_bordered-pulled.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\less\_core.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\less\_fixed-width.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\less\_icons.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\less\_larger.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\less\_list.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\less\_mixins.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\less\_rotated-flipped.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\less\_screen-reader.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\less\_stacked.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\less\_variables.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\scss\fa-brands.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\scss\fa-regular.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\scss\fa-solid.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\scss\fontawesome.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\scss\_animated.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\scss\_bordered-pulled.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\scss\_core.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\scss\_fixed-width.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\scss\_icons.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\scss\_larger.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\scss\_list.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\scss\_mixins.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\scss\_rotated-flipped.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\scss\_screen-reader.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\scss\_stacked.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\scss\_variables.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\webfonts\fa-brands-400.eot">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\webfonts\fa-brands-400.svg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\webfonts\fa-brands-400.ttf">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\webfonts\fa-brands-400.woff">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\webfonts\fa-brands-400.woff2">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\webfonts\fa-regular-400.eot">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\webfonts\fa-regular-400.svg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\webfonts\fa-regular-400.ttf">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\webfonts\fa-regular-400.woff">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\webfonts\fa-regular-400.woff2">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\webfonts\fa-solid-900.eot">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\webfonts\fa-solid-900.svg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\webfonts\fa-solid-900.ttf">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\webfonts\fa-solid-900.woff">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\font-awesome\webfonts\fa-solid-900.woff2">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\material-design-iconic-font\css\material-design-iconic-font.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\material-design-iconic-font\css\material-design-iconic-font.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\material-design-iconic-font\css\materialdesignicons.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.eot">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.svg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.ttf">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.woff">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.woff2">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.eot">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.svg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.ttf">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.woff">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.woff2">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\themify-icons\fonts\themify.eot">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\themify-icons\fonts\themify.svg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\themify-icons\fonts\themify.ttf">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\themify-icons\fonts\themify.woff">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\themify-icons\ie7\ie7.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\themify-icons\ie7\ie7.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\themify-icons\themify-icons.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\themify-icons\themify-icons.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\css\weather-icons-core.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\css\weather-icons-variables.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\css\weather-icons-wind.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\css\weather-icons-wind.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\css\weather-icons.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\css\weather-icons.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\fonts\weathericons-regular-webfont.eot">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\fonts\weathericons-regular-webfont.svg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\fonts\weathericons-regular-webfont.ttf">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\fonts\weathericons-regular-webfont.woff">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\fonts\weathericons-regular-webfont.woff2">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\css\variables-beaufort.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\css\variables-day.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\css\variables-direction.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\css\variables-misc.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\css\variables-moon.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\css\variables-neutral.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\css\variables-night.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\css\variables-time.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\css\variables-wind-names.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-classes\classes-beaufort.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-classes\classes-day.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-classes\classes-direction.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-classes\classes-misc.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-classes\classes-moon-aliases.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-classes\classes-moon.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-classes\classes-neutral.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-classes\classes-night.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-classes\classes-time.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-classes\classes-wind-aliases.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-classes\classes-wind-degrees.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-classes\classes-wind.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-variables\variables-beaufort.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-variables\variables-day.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-variables\variables-direction.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-variables\variables-misc.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-variables\variables-moon.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-variables\variables-neutral.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-variables\variables-night.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-variables\variables-time.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\icon-variables\variables-wind-names.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\mappings\wi-forecast-io.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\mappings\wi-owm.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\mappings\wi-wmo4680.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\mappings\wi-yahoo.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\weather-icons-classes.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\weather-icons-core.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\weather-icons-variables.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\weather-icons-wind.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\weather-icons-wind.min.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\weather-icons.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\less\weather-icons.min.less">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-beaufort.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-day.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-direction.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-misc.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-moon-aliases.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-moon.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-neutral.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-night.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-time.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-wind-aliases.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-wind-degrees.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-wind.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-beaufort.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-day.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-direction.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-misc.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-moon.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-neutral.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-night.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-time.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-wind-names.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\mappings\wi-forecast-io.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\mappings\wi-owm.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\mappings\wi-wmo4680.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\mappings\wi-yahoo.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\weather-icons-classes.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\weather-icons-core.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\weather-icons-variables.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\weather-icons-wind.min.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\weather-icons-wind.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\weather-icons.min.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\icons\weather-icons\sass\weather-icons.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\style.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\style.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\js\app-style-switcher.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\js\custom.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\js\pages\dashboards\dashboard1.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\js\sidebarmenu.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\js\waves.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

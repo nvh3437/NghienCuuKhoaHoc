@@ -1,0 +1,370 @@
+﻿@{
+    ViewData["Title"] = "Giảng viên";
+}
+@model PersonalViewModel
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb bg-white">
+    <div class="row align-items-center">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Quản lý Giảng Viên</h4>
+        </div>
+        <div class="col-md-3 col-sm-4 col-xs-6 ms-auto">
+            <div class="dropdown float-end">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-align-left"></i> Công cụ
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li>
+                        <button type="button" class=" dropdown-item" data-bs-toggle="modal" data-bs-target="#createModal">
+                            Thêm mới
+                        </button>
+                    </li>
+
+                    <li><button id="deleteRange" onclick="deleteRange()" class="dropdown-item">Xóa đã chọn</button></li>
+                </ul>
+            </div>
+            <div class="dropdown float-end me-1">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class=" fas fa-"></i> Bộ lọc
+                </button>
+                <form id="Filter" name="Filter" method="get" action="/Personal" class="dropdown-menu p-4" aria-labelledby="dropdownMenuButton1">
+                    <div class="mb-3">
+                        <label for="Field" class="form-label">Phòng - Khoa</label>
+                        <select id="Department" name="Department" class="form-select" aria-label="Default select example" value="@Model.Department">
+                            <option value="">Tất cả</option>
+                            @foreach (var item in Model.Departments)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="PageSize" class="form-label">Hiển thị</label>
+                        <select id="PageSize" name="PageSize" class="form-select" aria-label="Default select example">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Thực hiện</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="white-box">
+                <div class="d-md-flex mb-3">
+                    <h3 class="box-title mb-0">Giảng Viên</h3>
+
+                </div>
+                <div class="table-responsive">
+                    <table class="table no-wrap">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">Avatar</th>
+                                <th class="border-top-0">Họ Tên</th>
+                                <th class="border-top-0">Mã Giảng Viên</th>
+                                <th class="border-top-0">Khoa</th>
+                                <th class="border-top-0">Chọn</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var item in Model.Personals)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class=""><img src="@item.Avatar" alt="user" width="40" height="40" class="rounded-circle"></div>
+                                        </td>
+                                        <td class="txt-oflo">@item.Name</td>
+                                        <td>@item.Id</td>
+                                        <td class="txt-oflo">@item.Department</td>
+                                        <td>
+                                            <input class="form-check-input" type="checkbox" value="@item.Id" name="selectedPersonals" id="@item.Id">
+                                            <button class="border-0" data-bs-toggle="modal" data-bs-target="#updateModal" onclick="openUpdateModal('@item.Id', '@item.Name', '@item.Avatar', '@item.Gender', '@item.Birth', '@item.DepartmentId', '@item.Email', '@item.PhoneNumber', '@item.Literacy', '@item.Position')"><i class=" far fa-edit"></i></button>
+                                            <a href="Personal/Detail?Id=@item.Id"><i class="  fas fa-info-circle"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    @Html.PagedListPager(
+                    Model.Personals,
+                    page => Url.Action("Index",new { Page = page, PageSize = Model.PageSize, Department = Model.Department, FindKeyword = Model.FindKeyword }),
+                    new PagedListRenderOptions()
+                    {
+                    ActiveLiElementClass = "bg-info text-light px-1",
+                    MaximumPageNumbersToDisplay = 5,
+                    ContainerDivClasses = new List<string>{"product__pagination"},
+                    LinkToPreviousPageFormat = "<i class=' fas fa-angle-left'></i>",
+                    LinkToNextPageFormat = "<i class=' fas fa-angle-right'></i>",
+                    LinkToFirstPageFormat = "<i class='fas fa-angle-double-left'></i>",
+                    LinkToLastPageFormat = "<i class='fas fa-angle-double-right'></i>",
+                    LiElementClasses = new List<string>{"me-3"},
+
+                    })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">Cập nhật Giảng viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="UpdateForm" method="post" asp-action="Update" asp-controller="Personal" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="Id" class="form-label">Mã giảng viên <span class="text-danger" asp-validation-for="Id"></span></label>
+                        <input asp-for="Id" type="text" class="form-control" name="Id" id="Id" readonly placeholder="GV0123456789">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Name" class="form-label">Họ Tên <span class="text-danger" asp-validation-for="Name"></span></label>
+                        <input asp-for="Name" type="text" class="form-control" name="Name" id="Name" placeholder="Nguyễn Văn A">
+                    </div>
+                    <div class="mb-3">
+                        <img id="Avatar" name="Avatar" style="max-width:30%;" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="NewAvatar" class="form-label">Ảnh <span class="text-danger" asp-validation-for="NewAvatar"></span></label>
+                        <input asp-for="NewAvatar" accept="image/png, image/jpeg" type="file" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="Gender" class="form-label">Giới tính <span class="text-danger" asp-validation-for="Gender"></span></label>
+                        <input asp-for="Gender" type="radio" class="form-check-input" name="Gender" id="Gender1" value="Nam" />
+                        <label class="form-check-label" for="Gender1">Nam</label>
+                        <input asp-for="Gender" type="radio" class="form-check-input" name="Gender" id="Gender2" value="Nữ" />
+                        <label class="form-check-label" for="Gender2">Nữ</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Birth" class="form-label">Ngày sinh <span class="text-danger" asp-validation-for="Birth"></span></label>
+                        <input asp-for="Birth" type="date" class="form-control" name="Birth" id="Birth">
+                    </div>
+                    <div class="mb-3">
+                        <label for="DepartmentId" class="form-label">Khoa <span class="text-danger" asp-validation-for="DepartmentId"></span></label>
+                        <select asp-for="DepartmentId" name="DepartmentId" id="DepartmentId" class="form-select" aria-label="Default select example">
+                            <option value="">Chọn khoa</option>
+                            @foreach (var item in Model.Departments)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Email" class="form-label">Email <span class="text-danger" asp-validation-for="Email"></span></label>
+                        <input asp-for="Email" type="email" class="form-control" name="Email" id="Email" placeholder="Example@gmail.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="PhoneNumber" class="form-label">Điện thoại <span class="text-danger" asp-validation-for="PhoneNumber"></span></label>
+                        <input asp-for="PhoneNumber" type="tel" class="form-control" name="PhoneNumber" id="PhoneNumber" placeholder="0123456789">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Literacy" class="form-label">Trình độ <span class="text-danger" asp-validation-for="Literacy"></span></label>
+                        <div class="dropdown">
+                            <input asp-for="Literacy" type="text" class="form-control dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" name="Literacy" id="Literacy" placeholder="Thạc sĩ">
+                            <ul class="dropdown-menu" aria-labelledby="Literacy">
+                                @foreach (var item in Model.Literacies)
+                                {
+                                    <li><button type="button" onclick="selectLiteraciesUpdateForm('@item.Value')" class="dropdown-item">@item.Value</button></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Position" class="form-label">Chức vụ <span class="text-danger" asp-validation-for="Position"></span></label>
+                        <div class="dropdown">
+                            <input asp-for="Position" type="text" class="form-control dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" name="Position" id="Position" placeholder="Trưởng khoa">
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                @foreach (var item in Model.Positions)
+                                {
+                                    <li><button type="button" onclick="selectPositionsUpdateForm('@item.Value')" class="dropdown-item">@item.Value</button></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" onclick="UpdateSubmit()" class="btn btn-primary">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">Thêm mới Khoa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="CreateForm" method="post" asp-action="Create" asp-controller="Personal" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="Id" class="form-label">Mã giảng viên <span class="text-danger" asp-validation-for="Id"></span></label>
+                        <input asp-for="Id" type="text" class="form-control" name="Id" id="Id" placeholder="GV0123456789">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Name" class="form-label">Họ Tên <span class="text-danger" asp-validation-for="Name"></span></label>
+                        <input asp-for="Name" type="text" class="form-control" name="Name" id="Name" placeholder="Nguyễn Văn A">
+                    </div>
+                    <div class="mb-3">
+                        <label for="NewAvatar" class="form-label">Ảnh <span class="text-danger" asp-validation-for="NewAvatar"></span></label>
+                        <input asp-for="NewAvatar" type="file" accept="image/png, image/jpeg" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="Gender" class="form-label">Giới tính <span class="text-danger" asp-validation-for="Gender"></span></label>
+                        <input asp-for="Gender" type="radio" class="form-check-input" name="Gender" id="Gender1" value="Nam" checked />
+                        <label class="form-check-label" for="Gender1">Nam</label>
+                        <input asp-for="Gender" type="radio" class="form-check-input" name="Gender" id="Gender2" value="Nữ" />
+                        <label class="form-check-label" for="Gender2">Nữ</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Birth" class="form-label">Ngày sinh <span class="text-danger" asp-validation-for="Birth"></span></label>
+                        <input asp-for="Birth" type="date" class="form-control" name="Birth" id="Birth">
+                    </div>
+                    <div class="mb-3">
+                        <label for="DepartmentId" class="form-label">Khoa <span class="text-danger" asp-validation-for="DepartmentId"></span></label>
+                        <select asp-for="DepartmentId" name="DepartmentId" id="DepartmentId" class="form-select" aria-label="Default select example">
+                            <option value="">Chọn khoa</option>
+                            @foreach (var item in Model.Departments)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Email" class="form-label">Email <span class="text-danger" asp-validation-for="Email"></span></label>
+                        <input asp-for="Email" type="email" class="form-control" name="Email" id="Email" placeholder="Example@gmail.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="PhoneNumber" class="form-label">Điện thoại <span class="text-danger" asp-validation-for="PhoneNumber"></span></label>
+                        <input asp-for="PhoneNumber" type="tel" class="form-control" name="PhoneNumber" id="PhoneNumber" placeholder="0123456789">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Literacy" class="form-label">Trình độ <span class="text-danger" asp-validation-for="Literacy"></span></label>
+                        <div class="dropdown">
+                            <input asp-for="Literacy" type="text" class="form-control dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" name="Literacy" id="Literacy" placeholder="Thạc sĩ">
+                            <ul class="dropdown-menu" aria-labelledby="Literacy">
+                                @foreach (var item in Model.Literacies)
+                                {
+                                    <li><button type="button" onclick="selectLiteraciesCreateForm('@item.Value')" class="dropdown-item">@item.Value</button></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Position" class="form-label">Chức vụ <span class="text-danger" asp-validation-for="Position"></span></label>
+                        <div class="dropdown">
+                            <input asp-for="Position" type="text" class="form-control dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" name="Position" id="Position" placeholder="Trưởng khoa">
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                @foreach (var item in Model.Positions)
+                                {
+                                    <li><button type="button" onclick="selectPositionsCreateForm('@item.Value')" class="dropdown-item">@item.Value</button></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" onclick="CreateSubmit()" class="btn btn-primary">Tạo mới</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+<script>
+    function windowLoad(){
+        $("#Filter #Department").val("@Model.Department");
+        $("#Filter #PageSize").val("@Model.PageSize");
+    }
+    function selectPositionsCreateForm(value){
+        $("#CreateForm #Position").val(value);
+    }
+    function selectLiteraciesCreateForm(value){
+        $("#CreateForm #Literacy").val(value);
+    }
+    function selectPositionsUpdateForm(value){
+        $("#UpdateForm #Position").val(value);
+    }
+    function selectLiteraciesUpdateForm(value){
+        $("#UpdateForm #Literacy").val(value);
+    }
+    function CreateSubmit(){
+        if($("#CreateForm #Id").valid() && $("#CreateForm #Name").valid() && $("#CreateForm #DepartmentId").valid() && $("#CreateForm #Email").valid() && $("#CreateForm #PhoneNumber").valid()){
+        document.getElementById("CreateForm").submit();
+        }
+    }
+    function UpdateSubmit(){
+        if($("#UpdateForm #Id").valid() && $("#UpdateForm #Name").valid() && $("#UpdateForm #DepartmentId").valid() && $("#UpdateForm #Email").valid() && $("#UpdateForm #PhoneNumber").valid()){
+        document.getElementById("UpdateForm").submit();
+        }
+    }
+    function openUpdateModal(Id, Name, Avatar, Gender, Birth, DepartmentId, Email, PhoneNumber, Literacy, Position){
+        document.getElementById("Id").value = Id;
+        document.getElementById("Name").value = Name;
+        document.getElementById("Avatar").src = Avatar;
+        if(Gender == "Nam"){
+            document.getElementById("Gender1").checked = true;
+        }
+        if(Gender == "Nữ"){
+            document.getElementById("Gender2").checked = true;
+        }
+        document.getElementById("Birth").value = Birth;
+        document.getElementById("DepartmentId").value = DepartmentId;
+        document.getElementById("Email").value = Email;
+        document.getElementById("PhoneNumber").value = PhoneNumber;
+        document.getElementById("Literacy").value = Literacy;
+        document.getElementById("Position").value = Position;
+    }
+
+    function deleteRange() {
+        if (confirm("Xác nhận xóa!") == true) {
+            var form = document.createElement("form");
+
+            form.method = "POST";
+            form.action = "/Personal/Delete";
+
+            document.getElementsByName("selectedPersonals").forEach(e=>{
+                if(e.checked){
+                    var element = document.createElement("input");
+                element.name = "selectedPersonals";
+                element.value = e.value;
+                element.type = 'hidden';
+                form.appendChild(element);
+                }
+            });
+
+            document.body.appendChild(form);
+
+            form.submit();
+        }
+    }
+</script>
+}

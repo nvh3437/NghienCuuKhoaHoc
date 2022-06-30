@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "_Layout";
+}
+<script>
+      
+    window.onload = function() {
+        windowLoad();
+      LoadNotify();
+    }
+</script>
+@if (TempData.ContainsKey("Notification")){
+    @using NghienCuuKhoaHoc.Services
+    Notification Notification = TempData["Notification"].ToString().ToNotification();
+    <partial name="NotificationViewPartial" model=Notification></partial>
+}

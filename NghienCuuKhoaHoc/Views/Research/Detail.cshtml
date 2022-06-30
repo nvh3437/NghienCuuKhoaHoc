@@ -1,0 +1,197 @@
+﻿@{
+    ViewData["Title"] = "Nghiên cứu";
+}
+@model ResearchDetailViewModel
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb bg-white">
+    <div class="row align-items-center">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Nghiên cứu khoa học</h4>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-4 col-xlg-3 col-md-12">
+            <div class="white-box">
+                <h2>File đính kèm</h2>
+                @foreach(var item in Model.ResearchFiles)
+                {
+                    <label class="p-1 m-1" id="labeln" for="n">
+                    <div class="text-center" style="width:100px;height:100px">
+                        <img src="@item.GetThumb()" class="img-thumbnail img-fluid" alt="...">
+                    </div><br>
+                    <h5 class="card-title mt-2">
+                        <a href="@item.File" download="@item.GetName()">@item.GetName()</a>
+                    </h5>
+                </label>
+                }
+            </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="col-lg-8 col-xlg-9 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form class="form-horizontal form-material">
+                        <h2>Đề tài</h2>
+                        <div class="form-group mb-4">
+                            <label class="col-md-12 p-0">Mã đề tài</label>
+                            <div class="col-md-12 border-bottom p-0">
+                                <input type="text" value="@Model.Id" disabled
+                                       class="form-control p-0 border-0">
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="col-md-12 p-0">Chủ nhiệm</label>
+                            <div class="col-md-12 border-bottom p-0">
+                                <input type="text" value="@Model.Instructor" disabled
+                                       class="form-control p-0 border-0">
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="col-md-12 p-0">Tên đề tài</label>
+                            <div class="col-md-12 border-bottom p-0">
+                                <textarea disabled class="form-control p-0 border-0">@Model.Subject</textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12 p-0 row">
+                            <div class="form-group mb-4 col">
+                                <label class="col-md-6 p-0">Lĩnh vực</label>
+                                <div class="col-md-6 border-bottom p-0">
+                                    <input type="text" value="@Model.Field" disabled
+                                           class="form-control p-0 border-0">
+                                </div>
+                            </div>
+                            <div class="form-group mb-4 col">
+                                <label class="col-md-6 p-0">Kinh phí</label>
+                                <div class="col-md-6 border-bottom p-0">
+                                    <input type="text" value="@Model.Expense" disabled
+                                           class="form-control p-0 border-0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 p-0 row">
+                            <div class="form-group mb-4 col">
+                                <label class="col-md-6 p-0">Ngày bắt đầu</label>
+                                <div class="col-md-6 border-bottom p-0">
+                                    <input type="text" value="@Model.DateStarted" disabled
+                                           class="form-control p-0 border-0">
+                                </div>
+                            </div>
+                            <div class="form-group mb-4 col">
+                                <label class="col-md-6 p-0">Ngày kết thúc</label>
+                                <div class="col-md-6 border-bottom p-0">
+                                    <input type="text" value="@Model.DateExpired" disabled
+                                           class="form-control p-0 border-0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="col-md-6 p-0">Trạng thái</label>
+                            <div class="col-md-6 border-bottom p-0">
+                                <input type="text" value="@Model.Status.GetName()" disabled
+                                       class="form-control p-0 border-0">
+                            </div>
+                        </div>
+                        <h2>Hội đồng nghiệm thu</h2>
+                        <div class="col-md-12 p-4 row border border-success">
+                            @if (Model.Chairman == null && Model.Commissioner1 == null && Model.Commissioner2 == null && Model.Secretary == null)
+                            {
+                                <text>Không có</text>
+                            }
+                            else
+                            {
+                                <div class="form-group mb-4 col-6">
+                                    <label class="col-md-6 p-0">Chủ tịch hội đồng</label>
+                                    <div class="col-md-6 border-bottom p-0">
+                                        <input type="text" value="@Model.Chairman" disabled
+                                           class="form-control p-0 border-0">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4 col-6">
+                                    <label class="col-md-6 p-0">Ủy viên</label>
+                                    <div class="col-md-6 border-bottom p-0">
+                                        <input type="text" value="@Model.Commissioner1" disabled
+                                           class="form-control p-0 border-0">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4 col-6">
+                                    <label class="col-md-6 p-0">Ủy viên</label>
+                                    <div class="col-md-6 border-bottom p-0">
+                                        <input type="text" value="@Model.Commissioner2" disabled
+                                           class="form-control p-0 border-0">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4 col-6">
+                                    <label class="col-md-6 p-0">Thư ký</label>
+                                    <div class="col-md-6 border-bottom p-0">
+                                        <input type="text" value="@Model.Secretary" disabled
+                                           class="form-control p-0 border-0">
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <h2>Nghiệm thu</h2>
+                        <div class="col-md-12 p-4 row border border-success">
+                            @if (Model.Score == null)
+                            {
+                                <text>Không có</text>
+                            }
+                            else
+                            {
+                                <div class="form-group mb-4 col-6">
+                                    <label class="col-md-6 p-0">Điểm số</label>
+                                    <div class="col-md-6 border-bottom p-0">
+                                        <input type="text" value="@Model.Score" disabled
+                                           class="form-control p-0 border-0">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4 col-6">
+                                    <label class="col-md-6 p-0">Đánh giá</label>
+                                    <div class="col-md-6 border-bottom p-0">
+                                        <input type="text" value="@Model.Rate.GetName()" disabled
+                                           class="form-control p-0 border-0">
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="form-group mb-4 mt-4">
+                            <div class="col-sm-12">
+                                <a href="/Print/Research?Id=@Model.Id" class="btn btn-success">Xuất File</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+    </div>
+    <!-- Row -->
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
